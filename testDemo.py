@@ -20,6 +20,8 @@ for row in cursor.fetchall():
     print( row)
 print('共查找出', cursor.rowcount, '条数据')
 '''
+'''
+
 import pymysql
 import time
 
@@ -44,7 +46,6 @@ finally:
 
 print(cursor.fetchall())
 
-'''
 conn = r.connect(host='aws-us-east-1-portal.1.dblayer.com',  
              port=23232,
              auth_key='[auth_key]',
@@ -53,3 +54,17 @@ conn = r.connect(host='aws-us-east-1-portal.1.dblayer.com',
 'issueTracker://root:root@10.141.221.73:3306'.encode("idna")
              
 '''
+import requests
+import json
+
+url = "http://10.141.221.80:8002/project"
+
+body = {
+    "url":"https://github.com/mockito/mockito"
+}
+data = json.JSONEncoder().encode(body)
+
+headers = {'token':'ec15d79e36e14dd258cfff3d48b73d35',
+           'content-type':'application/json'}
+response = requests.post(url, data=data, headers=headers).text
+print(response)
